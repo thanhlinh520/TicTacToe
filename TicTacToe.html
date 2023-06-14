@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> XO </title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Dosis:wght@800&family=Josefin+Sans:wght@700&family=Nunito:wght@200&family=Rajdhani:wght@300&family=Roboto:wght@500&family=Signika+Negative:wght@300;700&family=Work+Sans:wght@100&display=swap" rel="stylesheet">
+	<style> 
+		body {
+			text-align: center;
+			font-family: Josefin Sans, sans-serif;
+		}
+
+		#board {
+			background-color: white;
+			background-image: url('Background.png');
+			background-size: cover;
+
+			margin: 0 auto;
+			display: flex;
+			flex-wrap: wrap;
+			width: 600px;
+			height: 600px;
+		}
+
+		.tile {
+			width: 200px;
+			height: 200px;
+			border: none;
+			background: none;
+			background-color: transparent;
+		}
+
+		.x {
+			width: 200px;
+			height: 200px;
+			background-image: url('X.png');
+			background-size: cover;
+			border: none;
+			background-color: transparent;
+		}
+
+		.o {
+			width: 200px;
+			height: 200px;
+			border: none;
+			background-image: url('O.png');
+			background-size: cover;
+			background-color: transparent;
+		}
+		.etou {
+			position: absolute;
+			top: 99%;
+			background: transparent;
+			color: white;
+			border: none;
+		}
+		.eti {
+			position: absolute;
+			top: 93%;
+			left: 50%;
+			padding: 30px;
+			border: 2px solid black;
+			border-radius: 5px;
+			padding-right: 50px;
+			padding-left: 50px;
+
+			background-color: lightcyan;
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<h1> XO Revamped </h1>
+	<h2> Winner: <span id = "score"> In queue </span> </h2>
+	<hr>
+	<div id = "board">
+		<button id = "1" onclick = "XorO(1)" class="tile"> </button>
+		<button id = "2" onclick = "XorO(2)" class="tile"> </button>
+		<button id = "3" onclick = "XorO(3)" class="tile"> </button>
+		<button id = "4" onclick = "XorO(4)" class="tile"> </button>
+		<button id = "5" onclick = "XorO(5)" class="tile"> </button>
+		<button id = "6" onclick = "XorO(6)" class="tile"> </button>
+		<button id = "7" onclick = "XorO(7)" class="tile"> </button>
+		<button id = "8" onclick = "XorO(8)" class="tile"> </button>
+		<button id = "9" onclick = "XorO(9)" class="tile"> </button>
+	</div>
+	<button onclick="location.reload()" id="reset" class="etou">New game</button>
+	<script type="text/javascript">
+		var count = 0;
+		var chk = 0;
+		var y = [0,0,0,0,0,0,0,0,0,0];
+		function XorO(tmp) {
+			count++;
+			if(y[tmp]==0 && chk==0) {
+				document.getElementById(tmp.toString()).classList.remove("tile");
+				if(count%2==1)	{
+					y[tmp]+=1; 
+					document.getElementById(tmp.toString()).classList.add("x");
+				}
+				else {
+					y[tmp]+=11; 
+					document.getElementById(tmp.toString()).classList.add("o");
+				}
+			}
+			if(y[1]+y[2]+y[3]==3 || y[4]+y[5]+y[6]==3 || y[7]+y[8]+y[9]==3 || y[1]+y[4]+y[7]==3 || y[2]+y[5]+y[8]==3 || y[3]+y[6]+y[9]==3 || y[1]+y[5]+y[9]==3 || y[3]+y[5]+y[7]==3) {
+				document.getElementById("score").innerText="X Win";
+				chk++;
+				document.getElementById("reset").classList.remove("etou");
+				document.getElementById("reset").classList.add("eti");
+			}
+			else if(y[1]+y[2]+y[3]==33 || y[4]+y[5]+y[6]==33 || y[7]+y[8]+y[9]==33 || y[1]+y[4]+y[7]==33 || y[2]+y[5]+y[8]==33 || y[3]+y[6]+y[9]==33 || y[1]+y[5]+y[9]==33 || y[3]+y[5]+y[7]==33) {
+				document.getElementById("score").innerText="O Win";
+				chk++;
+			}
+		}
+	</script>
+</body> 
+</html>
